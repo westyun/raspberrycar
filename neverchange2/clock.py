@@ -62,6 +62,7 @@ pwm_setup()
 # =======================================================================
 dis = 20  # ??
 case = 1
+case2 = 3
 
 try:
     while True:
@@ -72,15 +73,15 @@ try:
         print(ledcondition)
         
         # when the distance is above the dis, moving object forwards
-        if (distance > dis) and (ledcondition in forward_condition) and (case ==1):
+        if (distance > dis) and (ledcondition in forward_condition) and (case ==1 or case2 ==3):
             go_forward(40,0.3)
             stop()
             sleep(0.1)
-        elif (distance > dis) and (ledcondition in sp1) and (case ==1):
+        elif (distance > dis) and (ledcondition in sp1) and (case ==1 or case2 ==3):
             curveturn(20,30,0.5)
             stop()
             sleep(0.5)
-        elif (distance > dis) and (ledcondition in sp2) and (case ==1):
+        elif (distance > dis) and (ledcondition in sp2) and (case ==1 or case2 ==3):
             curveturn(30,20,0.5)
             stop()
             sleep(0.5)
@@ -93,6 +94,8 @@ try:
             leftSwingTurn(40,0.5)
             go_forward(90,0.1)
             leftSwingTurn(40,0.5)
+            if case == 2:
+                case2 +=1
             case +=1
             if (distance > dis) and (ledcondition in keep_condition):
                 go_forward_any(50)
@@ -100,7 +103,7 @@ try:
                 stop()
                 sleep(0.5)
                 rightSwingTurn(40,0.5)
-        while (distance > dis) and (ledcondition in right_condition) and (case ==2):
+        while (distance > dis) and (ledcondition in right_condition) and (case ==2 or case2 ==4):
             curveturn(30,20,1)
                 
             ########################################################
